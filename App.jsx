@@ -5,8 +5,8 @@ export default function App() {
 
   //Estados de autenticação
   const [ user, setUser ] = useState(null);
-  const [ email, setEmail ] = useState('');
-  const [ senha, setSenha ] = useState('');
+  const [ email, setEmail ] = useState("");
+  const [ senha, setSenha ] = useState("");
   
   //Estados da tarefa
   const [ tarefas, setTarefas ] = useState([]);
@@ -72,6 +72,12 @@ export default function App() {
         password: senha,
       }
     );
+
+    if(resposta.error){
+      alert('Erro ao entrar: ' + resposta.error.message);
+    } else {
+      alert('Receba');
+    }
   }
 
   async function logout(){
@@ -80,7 +86,20 @@ export default function App() {
 
   if(!user){
     return (
-      <div>da nada</div>
+      <div>
+        <h1>da nada</h1>
+        <h2>Login/Cadastro</h2>
+        <div>
+          <input 
+            type='email' placeholder='insira seu email' value={email} onChange={e => setEmail(e.target.value)} 
+          />
+          <input 
+            type='password' placeholder='insira sua senha' value={senha} onChange={e => setSenha(e.target.value)} 
+          />
+          <button onClick={login}>entrar</button>
+          <button onClick={cadastrar}>cadastrar</button>
+        </div>
+      </div>
     )
   }
   return (
